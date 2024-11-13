@@ -7,8 +7,9 @@ The system is deployed as a web-based application using Flask. Users can upload 
 
 **Key Features**
 
-**Machine Learning Models:** _Utilizes an Autoencoder and Random Forest model for anomaly detection, with features extracted from real network traffic data._
-Feature Extraction and Preprocessing: Processes network traffic captured in .pcapng files, extracting relevant features for model input._
+**Machine Learning Models:** _Utilizes Random Forest model for anomaly detection, with features extracted from real network traffic data._
+
+**Feature Extraction and Preprocessing:** _Processes network traffic captured in .pcapng files, extracting relevant features for model input.__
 
 **Web Interface:** _Built using Flask, providing an intuitive interface for users to upload files and view results._
 
