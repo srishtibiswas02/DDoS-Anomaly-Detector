@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDoS Detector</title>
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    .remove-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #f8d7da;
+        color: #d9534f;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+
+    }
+
+    .remove-button:hover {
+        background-color: #c93737;
+        color: white;
+    }
+
+    .file-validation-message {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-section">
+            <img src="{{url_for('static',filename='logonobg.png')}}" alt="Logo" class="logo-image">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#usage-section">Usage Guide</a></li>
+                <li><a href="#input-traffic">Get Started</a></li>
+                <li><a href="#faq-section">FAQ</a></li>
+                <li><a href="#website-info-section">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <div class="content-container">
+        <section id="anomaly-detection-section">
+            <h2 style="font-size: 50px; ">Anomaly Detection</h2>
+            <div class="content">
+                <p>Anomaly detection plays a crucial role in safeguarding networks against Distributed Denial of Service (DDoS) attacks. By analyzing traffic patterns, our system identifies deviations from normal behavior. Such anomalies can indicate malicious activities that may disrupt network services. Implementing effective anomaly detection helps in maintaining service availability and ensuring a secure online environment.
+                    <br>  <br>
+                    <a href="#input-traffic">Check Your Network Traffic</a>
+                </p> 
+                <img src="{{url_for('static',filename='anomalyright.png')}}" alt="Anomaly Detection" class="image-display">
+            </div>
+        </section>
+        
+        <section class="usage-section">
+            <h2>Usage Guide</h2>
+            <div class="usage-grid">
+                <div class="usage-box">
+                    <i class="fas fa-network-wired usage-icon"></i>
+                    <p><strong>What's Going On:</strong> We use your network traffic records to check for any irregularities that could suggest a DDoS attack.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-shield-alt usage-icon"></i>
+                    <p><strong>Why We Use This:</strong> Early detection of suspicious activity allows for timely interventions, preventing service disruptions.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-traffic-light usage-icon"></i>
+                    <p><strong>Real-Life Example:</strong> For instance, an unexpected surge in traffic can be a red flag for an ongoing attack. It can lead to an unresposive server. </p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-upload usage-icon"></i>
+                    <p><strong>How to Send Network Traffic:</strong> Use network analysis tools such as Wireshark or Pyshark to capture your data, then upload the .pcap file here.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-lock usage-icon"></i>
+                    <p><strong>Security Risks:</strong> Rest assured, your uploaded files are analyzed securely, and we do not retain any of your data.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-file-alt usage-icon"></i>
+                    <p><strong>Detailed Reports:</strong> Once the analysis is done, a detailed report with visualization of the network traffic will be generated.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-database usage-icon"></i>
+                    <p><strong>Data Retention:</strong> Your data is processed and deleted after the analysis. No data is stored on our servers.</p>
+                </div>
+                <div class="usage-box">
+                    <i class="fas fa-tools usage-icon"></i>
+                    <p><strong>Tools We Use:</strong> Our detection engine utilizes machine learning models to detect anomalies in real-time network traffic.</p>
+                </div>
+            </div>
+        </section>
+               
+
+        <section class="process-overview-section">
+            <h2 align="center">Working</h2>
+            <div class="steps-container">
+                <div class="step" data-content="Send us your network traffic using tools such as Wireshark or Pyshark. The uploaded data will be securely transmitted to us for analysis. This file contains features of your network traffic.">
+                    <h3>Send Your Network Traffic</h3>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step" data-content="Once the CSV file is uploaded, our model analyzes the traffic pattern and examines whether the traffic is suspicious or not. If suspicious, it classifies it as an anomaly.">
+                    <h3>Analyze Your Traffic</h3>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step" data-content="If the traffic is identified as an anomaly, it could be a sign of a DDoS attack. On the other hand, if it's classified as normal, no threat has been detected in the network traffic.">
+                    <h3>Classified as Anomaly or Normal</h3>
+                </div>
+            </div>
+            <p id="step-content"></p>
+        </section>
+
+
+        <section class="file-upload-section" id="input-traffic">
+            <h2>Check Your Network Traffic</h2>
+            <div class="file-upload-content">
+                <div class="upload-box">
+                    <form action="{{url_for('upload_file')}}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file-input" accept=".pcapng,.pcap">
+                    <label for="file-input" class="input-label">
+                        <i class="fas fa-upload"></i> Upload Packet Capture File
+                    </label>
+                        <button type="submit" class="redirect-button">Check</button>
+                        <button type="button" id="removeButton" style="display: none; margin-left: 120px;" class="remove-button">
+                            Remove File
+                        </button>
+                    </form>
+                    <p id="file-status"></p>
+                    <div id="file-validation" class="file-validation-message"></div>
+                </div>
+                <div class="file-preview-container">
+                    <div class="file-preview" id="file-preview">
+                        <div class="file-preview-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+                
+        
+
+        <section id="faq-section">
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <ul>
+                <li>
+                    <strong>What file formats can I upload?</strong>
+                    <p>Only .pcap files are accepted for upload. Ensure your data is formatted correctly for optimal analysis.</p>
+                </li>
+                <li>
+                    <strong>What should I do if I encounter an error?</strong>
+                    <p>Ensure that you are inputting the correct format else reload the web page.</p>
+                <li>
+                    <strong>Is my data secure?</strong>
+                    <p>we prioritize your privacy and security. Uploaded data is handled with utmost confidentiality . So Yes, the data you input is used solely for making predictions and is not stored by the system.</p>
+                </li>
+                <li>
+                    <strong>What happens if an anomaly is detected?</strong>
+                    <p>If an anomaly is detected in your network traffic, you will receive a notification outlining the potential threat and recommended actions to mitigate it.</p>
+                </li>
+                <li>
+                    <strong>Does this model comply with data protection regulations?</strong>
+                    <p>The model processes data locally during your interaction. No personally identifiable information (PII) is collected or stored.</p>
+                </li>
+                <li>
+                    <strong>How accurate is the model?</strong>
+                    <p>The model has been evaluated on a test set with an accuracy of 99%. Performance metrics such as precision, recall, and F1 score are also available for detailed insights.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="website-info-section">
+            <h2>About Us</h2>
+            <p>This website is specifically designed to assist users in monitoring and analyzing their network traffic for potential anomalies indicative of DDoS attacks. Utilizing state-of-the-art algorithms, we provide an efficient and user-friendly interface for threat detection. Users can upload their traffic data for real-time analysis, allowing them to take proactive measures against potential threats.In today's digital world, cyber threats are increasingly sophisticated, and ensuring the security of your network is paramount. 
+            <br>
+            Our platform empowers users to take proactive measures by analyzing network traffic patterns and identifying any irregularities that may indicate malicious activity. With our comprehensive analysis, we aim to enhance your online security and peace of mind.
+            <br>
+            Our team is comprised of enthusiastic individuals who believe in the importance of technology and innovation in safeguarding digital spaces. We strive to make our platform accessible to everyone, regardless of technical expertise.</p>
+            <br>
+            <h3>Contact Us</h3>
+                <p>We love to hear from you! Whether you have questions, feedback, or just want to say hi, feel free to reach out to us.</p>
+                <!-- <ul>
+                    <li><strong>Email:</strong> <a href="mailto:support@ddosdetector.com">srishtibiswas284@gmail.com</a></li>
+                    <li><strong>Follow us on social media:</strong></li>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul> -->
+                <!-- </ul> -->
+                    </section>
+                </div>
+
+    <footer>
+        <p>© 2024 DDoS Detector. All rights reserved. &nbsp;&nbsp;&nbsp;
+            <a href="https://linkedin.com/in/srishtibiswas" target="main">Srishti Biswas</a> |
+            <a href="https://linkedin.com/in/tiya-batra-53323b293" target="main">Tiya Batra | </a>
+            <a href="https://linkedin.com/in/priyanshidalal" target="main">Priyanshi Dalal</a>
+        </p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file-input');
+            const filePreview = document.getElementById('file-preview');
+            const removeButton = document.getElementById('removeButton');
+            const fileStatus = document.getElementById('file-status');
+            const fileValidation = document.getElementById('file-validation');
+            const form = document.querySelector('form');
+        
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                
+                if (file) {
+                    if (!file.name.toLowerCase().endsWith('.pcapng') && !file.name.toLowerCase().endsWith('.pcap')) {
+                        fileValidation.textContent = 'Please upload a valid .pcapng or .pcap file';
+                        fileValidation.style.color = 'red';
+                        fileInput.value = ''; 
+                        return;
+                    }
+        
+                    fileValidation.textContent = `File selected: ${file.name}`;
+                    fileValidation.style.color = 'green';
+                    removeButton.style.display = 'block';
+                    
+                    filePreview.classList.add('visible');
+                    const previewName = filePreview.querySelector('.file-preview-name');
+                    if (previewName) {
+                        previewName.textContent = file.name;
+                    }
+                } else {
+                    resetFileUpload();
+                }
+            });
+        
+            removeButton.addEventListener('click', function() {
+                resetFileUpload();
+            });
+        
+            form.addEventListener('submit', function(e) {
+                if (!fileInput.files[0]) {
+                    e.preventDefault();
+                    fileValidation.textContent = 'Please select a file first';
+                    fileValidation.style.color = 'red';
+                    return;
+                }
+                
+                const file = fileInput.files[0];
+                if (!file.name.toLowerCase().endsWith('.pcapng') && !file.name.toLowerCase().endsWith('.pcap')) {
+                    e.preventDefault();
+                    fileValidation.textContent = 'Please upload a valid .pcapng or .pcap file';
+                    fileValidation.style.color = 'red';
+                    return;
+                }
+            });
+        
+            function resetFileUpload() {
+                fileInput.value = '';
+                fileValidation.textContent = '';
+                removeButton.style.display = 'none';
+                filePreview.classList.remove('visible');
+                const previewName = filePreview.querySelector('.file-preview-name');
+                if (previewName) {
+                    previewName.textContent = '';
+                }
+            }
+        });
+        
+        // Steps interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            const stepContent = document.getElementById('step-content');
+        
+            steps.forEach(step => {
+                step.addEventListener('mouseover', function() {
+                    stepContent.textContent = this.getAttribute('data-content');
+                    this.style.color = 'white';
+                });
+        
+                step.addEventListener('mouseout', function() {
+                    stepContent.textContent = '';
+                    this.style.color = '';
+                });
+            });
+        });
+        
+        // Intersection Observer for fade-in animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const faders = document.querySelectorAll('.fade-in');
+            
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -100px 0px"
+            };
+        
+            const appearOnScroll = new IntersectionObserver(
+                function(entries, observer) {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    });
+                }, 
+                appearOptions
+            );
+        
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+        </script>
+</body>
+</html>
