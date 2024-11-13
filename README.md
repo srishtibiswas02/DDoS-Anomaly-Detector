@@ -18,6 +18,6 @@ Feature Extraction and Preprocessing: Processes network traffic captured in .pca
 Project Structure_
 **Frontend:** _HTML, CSS, and JavaScript for a user-friendly web interface, including upload functionality and visualization._
 
-**Backend:** _Flask for routing, feature extraction, and model inference, using test.py for feature extraction and test_pred.py for prediction._
+**Backend:** _Flask for routing, feature extraction, and model inference, using test.py for feature extraction and prediction._
 
 **Model:** _Random Forest Classifier was used due to its high accuracy and speed while working with large datasets._
