@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static',filename='result_style.css')}}">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Prediction Visualization</h1>
+
+<div class="image-grid">
+    </div>
+    
+    <div class="image-grid">
+        <div class="img-box">
+            <img src="{{url_for('static',filename='visualization1.png')}}" alt="Visualization 1">
+        </div>
+        <div class="img-box">
+        <img src="{{url_for('static',filename='visualization2.png')}}" alt="Visualization 2">
+    </div>
+    <div class="img-box">
+        <img src="{{url_for('static',filename='visualization3.png')}}" alt="Visualization 3">
+    </div>
+    <div class="img-box">
+        <img src="{{url_for('static',filename='visualization4.png')}}" alt="Visualization 4">
+    </div>
+</div> 
+    
+
+    <h1>Detailed Prediction Results</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flow Key</th>
+                    <th>Prediction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in predictions %}
+                <tr>
+                    <td data-tooltip="Prediction result" >{{ result['flow_key'] }}</td>
+                    <td data-tooltip="Flow identifier" class="{{ 'status-benign' if result['Predictions'] == 0 else 'status-attack' }}">
+                        {{ 'BENIGN' if result['Predictions'] == 0 else 'ATTACK' }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="text-align: center;">
+            <a href="{{ url_for('home') }}">Back</a>
+        </div>
+</body>
+</html>
