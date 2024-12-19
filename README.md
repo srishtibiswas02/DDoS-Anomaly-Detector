@@ -3,6 +3,7 @@ By-
   Srishti Biswas
   Tiya Batra
   Priyanshi Dalal
+  
 **Project Description**
 
 This project is a Distributed Denial of Service (DDoS) Anomaly Detection System designed to identify unusual network traffic patterns indicative of DDoS attacks in real-time. Leveraging machine learning techniques, the system uses Random Forest model to classify network traffic as either "Benign" or "Attack." The model was trained on a wide dataset, ensuring that the system can effectively distinguish between normal and anomalous traffic patterns.
